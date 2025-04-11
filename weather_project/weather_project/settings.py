@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from dotenv import load_dotenv
 import os
 from pathlib import Path
-import socket
+# import socket
 
 load_dotenv()
 
@@ -30,11 +30,14 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'Jagaveeran.pythonanywhere.com']
 
-if socket.gethostname().startswith('liveweb'):
-    ALLOWED_HOSTS = ['Jagaveeran.pythonanywhere.com']
-else:
-    ALLOWED_HOSTS = ["localhost","127.0.0.1"]
+
+
+# if socket.gethostname().startswith('liveweb'):
+#     ALLOWED_HOSTS = ['Jagaveeran.pythonanywhere.com']
+# else:
+#     ALLOWED_HOSTS = ["localhost","127.0.0.1"]
 
 
 # Application definition
