@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block title %} Home {% endblock %}
+
+{% block body %}
+<div class="container mt-2">
+  <h2 class='text-center mb-3'>Weather App</h2>
+  <form action="" method="POST" class='mb-2'>
+    {% csrf_token %}
+    <div class='input-group mx-auto group1'>
+      <input class='form-control' type="text" name="city" placeholder="City Name">
+      <button class='btn btn-primary' type='submit'>Weather</button>
+    </div>
+  </form>
+
+  {% if weather_data %}
+  <div class='text-center mb-2'>
+    <h3 class='mb-2'>{{ weather_data.city }}</h3>
+    <h4 class='display-6 mb-2'>{{ weather_data.temperature }}°C</h4>
+    <p class='card-text'>{{ weather_data.description }}</p>
+    <img src="http://openweathermap.org/img/w/{{ weather_data.icon }}.png" alt="{{ weather_data.description }}">
+  </div>
+  {% endif %}
+
+  {% if forecast_data %}
+  <div class='mb-4'>
+    <h2 class='text-center mb-4'>5 Days Forecast</h2>
+    <div class='row gap-3'>
+      {% for data in forecast_data %}
+      <div class="col">
+        <div class='text-center p-4 bg-light rounded'>
+          <h5 class='fw-bold mb-3'>{{ data.day }}</h5>
+          <h2 class='mb-3'>{{ data.temperature }}°C</h2>
+          <p class='card-text'>{{ data.description }}</p>
+          <img src="http://openweathermap.org/img/w/{{ data.icon }}.png" alt="{{ data.description }}">
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  {% if error %}
+  <p style="color: red;">{{ error }}</p>
+  {% endif %}
+</div>
+{% endblock %}
